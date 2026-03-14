@@ -1,0 +1,350 @@
+:root {
+    --dark-green: #1a432e;
+    --mid-green: #2d5a43;
+    --light-green: #88a47c;
+    --cream: #e5dec9;
+    --white-cream: #f4f1e6;
+    --lesson-blue: #3b5a8c;
+}
+
+body {
+    background-color:rgb(243, 241, 211);
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    margin: 0;
+}
+
+/* Nav bar */
+
+.navbar {   
+    background-color:#1a432e;
+    color: white;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 10px 30px;
+    
+}
+
+.navbar nav a { 
+    color: white; 
+    text-decoration:none; 
+    margin: 0 10px; 
+    font-weight: bold; 
+    position: sticky;
+}
+
+.user-profile img { 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    vertical-align: middle; 
+}
+
+/* Dashboard */
+
+.container { 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 0 15px; 
+}
+
+.welcome {
+    background-color: #d8cfbc;
+    border: 8px solid white;
+    border-radius: 60px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.welcome h1 { 
+    font-size: 4rem; 
+    margin: 0; 
+    color: #444; 
+    word-spacing: 15px; 
+}
+
+.welcome p { 
+    font-weight: bold; 
+    margin-top: -10px; 
+    color: #222; 
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr 280px;
+    gap: 20px;
+}
+
+/* Cards & HEaders */
+
+.card { 
+    background-color: var(--white-cream); 
+    border-radius: 25px; 
+    overflow: hidden; 
+    margin-bottom: 20px;
+}
+
+.card-header { 
+    background-color: var(--dark-green); 
+    color: white; 
+    text-align: center; 
+    padding: 12px; 
+    font-weight: bold; 
+}
+
+
+/* Progress card */
+.progress-body { 
+    text-align: center; 
+    padding: 15px; 
+}
+
+.badge-img { 
+    width: 100px; 
+    margin-bottom: 10px; 
+}
+
+.lvl-text { 
+    font-weight: bold; 
+    margin: 5px 0; 
+}
+
+.pts-text { 
+    font-size: 0.9rem; 
+}
+
+/* Leaderboard */
+
+.student-list { 
+    list-style: none; 
+    padding: 10px 15px; 
+    margin: 0; 
+}
+
+.student-list li { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 8px 0; 
+    font-size: 0.9rem; 
+    border-bottom: 1px solid #ddd; 
+}
+
+.student-list img { 
+    width: 25px; 
+    height: 25px; 
+    border-radius: 50%;
+ }
+
+.list-footer { 
+    padding: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    text-decoration: none;
+    color: inherit; 
+    cursor: pointer; 
+}
+
+.student-acc { 
+    height: 20px;
+}
+
+
+/* Center Column Btn & Chl */
+
+.tasks-buttons { display: flex; gap: 15px; margin-bottom: 15px; }
+.bt-large {
+    flex: 1;
+    background-color: var(--dark-green);
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.bt-icon { 
+    width: 40px; 
+}
+
+.card-header-inner { 
+    background-color: var(--dark-green); 
+    color: white; 
+    padding: 10px 20px; 
+    font-weight: bold; 
+}
+
+.challenge-grid { 
+    display: flex; 
+    gap: 10px; 
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.challenge-box { 
+    background-color: var(--light-green); 
+    border: 3px solid var(--dark-green); 
+    border-radius: 15px; 
+    padding: 15px; 
+    flex: 1; 
+    text-align: center; 
+}
+.challenge-box p { 
+    font-weight: bold; 
+    margin: 0 0 5px 0; 
+    font-size: 0.85rem; 
+}
+
+.reward { 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+}
+
+/* Lessons */
+
+.lesson-row { 
+    display:flex; 
+    gap: 15px; 
+    padding: 20px; 
+    align-items:flex-start;
+}
+
+.lesson-box { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 15px; 
+    border-radius: 15px; 
+    color: white; 
+    font-weight: bold; 
+    font-size: 0.8rem; 
+    min-height: 60px; 
+}
+
+.lesson-box img { 
+    width: 30px; 
+}
+
+.blue-box { 
+    background-color: var(--lesson-blue); 
+}
+
+.green-box { 
+    background-color: var(--dark-green); 
+}
+.start-bt { 
+    width: 100%; 
+    background-color: #4a8c4d; 
+    color: white; 
+    border: none; 
+    padding: 8px; 
+    border-radius: 15px; 
+    margin-top: 10px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.share-more { 
+    background-color: #c4c4c4; 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 15px; 
+    display: flex; 
+    align-items: center; 
+    text-align: center; 
+    padding: 10px; 
+    font-size: 0.8rem; 
+    cursor: pointer; 
+}
+
+/* Right Column */
+
+.teacher-header { 
+    background-color: var(--dark-green); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    text-decoration: none; 
+}
+
+.teacher-img { 
+    width: 25px; 
+}
+
+.teacher-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    padding: 15px;
+     border-bottom: 1px solid #ddd; 
+     background: #dcdcdc; 
+     margin: 10px;
+    border-radius: 15px; 
+    cursor: pointer; 
+}
+
+.teacher-item img { 
+    width: 30px; 
+}
+
+.teacher-item span { 
+    font-size: 0.7rem; 
+    color: #555; 
+}
+
+.resources-card {
+    background-color: #d1c8b3; 
+    padding: 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    cursor: pointer; 
+}
+
+.resources-card p { 
+    font-weight: bold; 
+    margin-bottom: 15px;
+}
+.resource-img { 
+    width: 120px; 
+}
+
+/* FOOTEr */
+
+.main-footer {
+    background-color: var(--dark-green);
+    color: white;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.footer-links a:hover { text-decoration: underline; }
