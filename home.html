@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Subject Review System</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">Academic Subject Review System</div>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="quizzes.html">Quizzes</a>
+            <a href="games.html">Mini-Games</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+        <div class="user-profile">
+            <img src="acc.jpg" alt="user profile">
+            <span>Ms. Perez</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="welcome">
+            <div class="welcome-content">
+                <h1>W E L C O M E !</h1>
+                <p>Make Learning Fun & Engaging!</p>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            
+            <div class="col-left">
+                <div class="card progress-card">
+                    <div class="card-header">Your Progress</div>
+                    <div class="progress-body">
+                        <img src="badge.jpg" class="badge-img" alt="Level Badge">
+                        <p class="lvl-text">Level 4</p>
+                        <p class="pts-text">Points: 450/600</p>
+                    </div>
+                </div>
+
+                <div class="card leaderboard-card">
+                    <div class="card-header">Top Students</div>
+
+                    <ul class="student-list">
+                        <li><img src="acc.jpg"> 1. Aviv - 100 pts</li>
+                        <li><img src="mar.jpg"> 2. Marianne - 97 pts</li>
+                        <li><img src="wil.jpg"> 3. Wilmalyn - 90 pts</li>
+                    </ul>
+
+                    <a href="leaderboard.html" class="list-footer">
+                        <img src="student.jpg" class="student-acc">
+                        <img src="girl.jpg" class="student-acc">
+                        <img src="man.jpg" class="student-acc">
+                        <img src="grad.jpg" class="student-acc">
+                        <span>... ></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-mid">
+                <div class="tasks-buttons">
+                    <a href="quiz.html" class="bt-large quiz-bt">
+                        <img src="quiz.jpg" class="bt-icon"> Take a Quiz!
+                    </a>
+                    <a href="games.html" class="bt-large game-bt">
+                        <img src="game.jpg" class="bt-icon"> Play a Mini-Game!
+                    </a>
+                </div>
+
+                <div class="card daily-challenges">
+                    <div class="card-header-inner">Daily Challenges</div>
+                    <div class="challenge-grid">
+                        <div class="challenge-box">
+                            <p>Complete 1 Quiz</p>
+                            <span class="reward">Reward: +10 pts</span>
+                        </div>
+                        <div class="challenge-box">
+                            <p>Play 1 Mini-Game</p>
+                            <span class="reward">Reward: +5 pts</span>
+                        </div>
+                        <div class="challenge-box">
+                            <p>Review 1 Lesson</p>
+                            <span class="reward">Reward: +7 pts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card lesson-library">
+                    <div class="card-header">
+                        <p>Lesson Library</p>
+                    </div>
+
+                    <div class="lesson-row">
+                        <div class="lesson-item">
+                            <div class="lesson-box blue-box">
+                                <img src="web.jpg"> <span>Web Development</span>
+                            </div>
+                            <button class="start-bt" onclick="location.href='web-dev.html'">Start Lesson</button>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-box green-box">
+                                <img src="hci.jpg"> <span>Human - Computer Interaction</span>
+                            </div>
+                            <button class="start-btn" onclick="location.href='hci.html'">Start Lesson</button>
+                        </div>
+                        <div class="share-more" onclick="location.href='share.html'">Share More</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-right">
+                <div class="card teacher-card">
+                    <a href="teacher-dashboard.html" class="card-header teacher-header">
+                        <img src="teacher.jpg" class="teacher-img"> Teacher Dashboard
+                    </a>
+                    <div class="teacher-item" onclick="location.href='progress-overview.html'">
+                        <img src="prog.jpg">
+                        <div>
+                            <strong>Progress Overview</strong>
+                            <span>Track Progress</span>
+                        </div>
+                    </div>
+                    <div class="teacher-item" onclick="location.href='performance.html'">
+                        <img src="stu.jpg">
+                        <div>
+                            <strong>Student Performance</strong>
+                            <span>View Results</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="study-tips.html" class="card resources-card">
+                    <p>Study Tips & Resources</p>
+                    <img src="study.jpg" class="resource-img">
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>Academic Subject Review System</strong>
+                <p>&copy; 2026 | All Rights Reserved</p>
+            </div>
+            <div class="footer-links">
+                <a href="help.html">Help Center</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
