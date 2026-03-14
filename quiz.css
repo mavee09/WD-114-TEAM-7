@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1100px;
+    background-color: beige; 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+
+.navbar {
+    background-color: #164216; 
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-center a {
+    color: #cbdacb;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+.nav-center a.active {
+    color: white;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+.content-wrapper {
+    padding: 40px;
+    text-align: center;
+}
+
+.header-section h1 {
+    color: #164216;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.header-section p {
+    color: #4a5d4a;
+    margin-bottom: 40px;
+}
+
+.dashboard-layout {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    flex: 1;
+}
+
+.task-card {
+    background-color: #164216;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.task-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.reward {
+    font-size: 0.85rem;
+}
+
+.status-tag {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+}
+
+.btn-white {
+    background: white;
+    color: #164216;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.stats-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-box {
+    background-color: #164216;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+.progress-section {
+    margin-top: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progress-section h3 {
+    color: #164216;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.progress-container {
+    background: white;
+    height: 12px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.progress-bar {
+    background: #164216;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.progress-text {
+    font-size: 0.7rem;
+    color: #164216;
+    font-weight: bold;
+}
+
+
+.add-section {
+    background: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.add-btn {
+    border: 1px solid #164216;
+    background: transparent;
+    color: #164216;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
