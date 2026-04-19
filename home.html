@@ -1,25 +1,33 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Subject Review System</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
 </head>
 <body>
 
     <header class="navbar">
         <div class="logo">Academic Subject Review System</div>
         <nav>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="home.html">Home</a>
             <a href="quizzes.html">Quizzes</a>
             <a href="games.html">Mini-Games</a>
             <a href="tasks.html">Tasks</a>
-            <a href="reports.html">Reports</a>
+            <a href="report.html">Reports</a>
         </nav>
-        <div class="user-profile">
-            <img src="acc.jpg" alt="user profile">
+       <div class="user-profile">
+        <div class="profile-trigger">
+            <img src="../assets/images/acc.jpg" alt="user profile">
             <span>Ms. Perez</span>
+            <span class="arrow">▼</span>
+        </div>
+
+        <div class="dropdown-menu">
+            <div class="dropdown-header">Admin Settings</div>
+            <a href="admin.html">⚙️ Admin Dashboard</a>
+            <a href="studentData.html">👥 Manage Students</a>
+            <a href="login.html" class="logout">🚪 Logout</a>
         </div>
     </header>
 
@@ -37,7 +45,7 @@
                 <div class="card progress-card">
                     <div class="card-header">Your Progress</div>
                     <div class="progress-body">
-                        <img src="badge.jpg" class="badge-img" alt="Level Badge">
+                        <img src="../assets/images/badge.jpg" class="badge-img" alt="Level Badge">
                         <p class="lvl-text">Level 4</p>
                         <p class="pts-text">Points: 450/600</p>
                     </div>
@@ -47,16 +55,16 @@
                     <div class="card-header">Top Students</div>
 
                     <ul class="student-list">
-                        <li><img src="acc.jpg"> 1. Aviv - 100 pts</li>
-                        <li><img src="mar.jpg"> 2. Marianne - 97 pts</li>
-                        <li><img src="wil.jpg"> 3. Wilmalyn - 90 pts</li>
+                        <li><img src="../assets/images/acc.jpg"> 1. Aviv - 100 pts</li>
+                        <li><img src="../assets/images/mar.jpg"> 2. Marianne - 97 pts</li>
+                        <li><img src="../assets/images/wil.jpg"> 3. Wilmalyn - 90 pts</li>
                     </ul>
 
-                    <a href="leaderboard.html" class="list-footer">
-                        <img src="student.jpg" class="student-acc">
-                        <img src="girl.jpg" class="student-acc">
-                        <img src="man.jpg" class="student-acc">
-                        <img src="grad.jpg" class="student-acc">
+                    <a href="boards.html".html" class="list-footer">
+                        <img src="../assets/images/student.jpg" class="student-acc">
+                        <img src="../assets/images/girl.jpg" class="student-acc">
+                        <img src="../assets/images/man.jpg" class="student-acc">
+                        <img src="../assets/images/grad.jpg" class="student-acc">
                         <span>... ></span>
                     </a>
                 </div>
@@ -64,11 +72,11 @@
 
             <div class="col-mid">
                 <div class="tasks-buttons">
-                    <a href="quiz.html" class="bt-large quiz-bt">
-                        <img src="quiz.jpg" class="bt-icon"> Take a Quiz!
+                    <a href="quizzes.html" class="bt-large quiz-bt">
+                        <img src="../assets/images/quiz.jpg" class="bt-icon"> Take a Quiz!
                     </a>
                     <a href="games.html" class="bt-large game-bt">
-                        <img src="game.jpg" class="bt-icon"> Play a Mini-Game!
+                        <img src="../assets/images/game.jpg" class="bt-icon"> Play a Mini-Game!
                     </a>
                 </div>
 
@@ -98,15 +106,18 @@
                     <div class="lesson-row">
                         <div class="lesson-item">
                             <div class="lesson-box blue-box">
-                                <img src="web.jpg"> <span>Web Development</span>
+                                <img src="../assets/images/web.jpg"> <span>Web Development</span>
                             </div>
-                            <button class="start-bt" onclick="location.href='web-dev.html'">Start Lesson</button>
+                             <a href="webdev.html">
+                                <button class="start-bt"> Start Lesson</button>
                         </div>
                         <div class="lesson-item">
                             <div class="lesson-box green-box">
-                                <img src="hci.jpg"> <span>Human - Computer Interaction</span>
+                                <img src="../assets/images/hci.jpg"> <span>Human - Computer Interaction</span>
                             </div>
-                            <button class="start-btn" onclick="location.href='hci.html'">Start Lesson</button>
+                             <a href="hci.html">
+                                <button class="start-bt"> Start Lesson</button>
+                             </a>
                         </div>
                         <div class="share-more" onclick="location.href='share.html'">Share More</div>
                     </div>
@@ -116,17 +127,17 @@
             <div class="col-right">
                 <div class="card teacher-card">
                     <a href="teacher-dashboard.html" class="card-header teacher-header">
-                        <img src="teacher.jpg" class="teacher-img"> Teacher Dashboard
+                        <img src="../assets/images/teacher.jpg" class="teacher-img"> Teacher Dashboard
                     </a>
                     <div class="teacher-item" onclick="location.href='progress-overview.html'">
-                        <img src="prog.jpg">
+                        <img src="../assets/images/prog.jpg">
                         <div>
                             <strong>Progress Overview</strong>
                             <span>Track Progress</span>
                         </div>
                     </div>
                     <div class="teacher-item" onclick="location.href='performance.html'">
-                        <img src="stu.jpg">
+                        <img src="../assets/images/stu.jpg">
                         <div>
                             <strong>Student Performance</strong>
                             <span>View Results</span>
@@ -134,9 +145,9 @@
                     </div>
                 </div>
 
-                <a href="study-tips.html" class="card resources-card">
+                <a href="study.html" class="card resources-card">
                     <p>Study Tips & Resources</p>
-                    <img src="study.jpg" class="resource-img">
+                    <img src="../assets/images/study.jpg" class="resource-img">
                 </a>
             </div>
 
