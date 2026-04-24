@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mini Games</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">Academic Subject Review System</div>
+  <div class="nav-links">
+    <span>Dashboard</span>
+    <span>Quizzes</span>
+    <span class="active">Mini-Games</span>
+    <span>Tasks</span>
+    <span>Reports</span>
+  </div>
+  <div class="user">Ms. Perez</div>
+</div>
+
+<h1 class="title">🎮 Mini Games 🎮</h1>
+
+<!-- GRID -->
+<div class="grid">
+
+  <!-- QUIZ -->
+  <div class="card">
+    <div class="card-header">Quiz <span id="quizCount"></span></div>
+    <p id="question"></p>
+    <div id="answers"></div>
+    <button onclick="nextQ()">Next Question</button>
+    <div class="scoreBox">
+      <p>Score</p>
+      <h2 id="quizScore">0</h2>
+    </div>
+  </div>
+
+  <!-- SCRAMBLE -->
+  <div class="card">
+    <div class="card-header">Word Scramble</div>
+    <p>Unscramble:</p>
+    <h2 id="scrambled"></h2>
+    <input id="scrInput">
+    <button onclick="checkScr()">Submit</button>
+    <p id="scrResult"></p>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="card">
+    <div class="card-header">Flashcards</div>
+    <div id="flashCard" onclick="flip()">Click to Reveal</div>
+    <button onclick="nextCard()">Next</button>
+  </div>
+
+  <!-- FILL -->
+  <div class="card">
+    <div class="card-header">Fill in the Blank</div>
+    <p id="fillQ"></p>
+    <input id="fillInput">
+    <button onclick="checkFill()">Submit</button>
+    <p id="fillRes"></p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+                                                </html>
