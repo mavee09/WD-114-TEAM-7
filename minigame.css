@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f3eee5;
+}
+
+/* NAV */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background: #0b5d2a;
+  color: white;
+  padding: 15px;
+}
+
+.nav-links span {
+  margin: 0 10px;
+}
+
+.active {
+  background: #ddd3c2;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: black;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  color: #0b5d2a;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+.card-header {
+  background: #0b5d2a;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* BUTTON */
+button {
+  background: #1e7c3b;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* SCORE */
+.scoreBox {
+  background: #efe3d2;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* FLASHCARD */
+#flashCard {
+  background: #dcead6;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  }
