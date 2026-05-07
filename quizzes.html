@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academic Subject Review System</title>
+  <link rel="stylesheet" href="/assets/css/quizzees.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <span class="nav-brand">Academic Subject Review System</span>
+    <ul class="nav-links">
+      <li><a href="home.html">Dashboard</a></li>
+      <li><a href="#" class="active">Quizzes</a></li>
+      <li><a href="#">Mini-Games</a></li>
+      <li><a href="tasks.html">Tasks</a></li>
+      <li><a href="#">Reports</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- ══════════════════════════════════
+         SCREEN 1 · QUIZ CREATOR (Upload)
+    ══════════════════════════════════ -->
+    <section class="screen active" id="screen-upload">
+      <div class="card upload-card">
+        <h1 class="card-title">QUIZ CREATOR</h1>
+        <p class="card-subtitle">Upload a folder to generate your review questions</p>
+
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+              <rect x="6" y="18" width="44" height="32" rx="3" fill="#E8A020"/>
+              <path d="M6 24h44" stroke="#C8801A" stroke-width="1.5"/>
+              <rect x="6" y="14" width="20" height="8" rx="2" fill="#F0B830"/>
+            </svg>
+          </div>
+          <p class="drop-title">Choose Quiz Folder</p>
+          <p class="drop-hint">All files within the folder will be processed.</p>
+          <input type="file" id="folderInput" webkitdirectory multiple hidden />
+          <button class="btn-browse" onclick="document.getElementById('folderInput').click()">Browse Folder</button>
+        </div>
+
+        <div class="file-info" id="fileInfo" style="display:none">
+          <span class="file-badge" id="fileBadge"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subjectCategory">Subject Category</label>
+            <select id="subjectCategory">
+              <option>Web Development</option>
+              <option>Human Computer Interaction</option>
+              <option>Discrete Structures</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quizTitle">Quiz Title</label>
+            <input type="text" id="quizTitle" placeholder="e.g., Midterm Exam Prep" />
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnGenerate" onclick="goToTypeSelect()">GENERATE QUIZ</button>
+      </div>
+
+      <div class="info-card">
+        <p class="info-title">Folder Requirements</p>
+        <p class="info-text">Ensure your folder contains images (.jpg/.png) or text files (.txt) for the quiz items. Max folder size: 50MB.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN 2 · QUIZ TYPE SELECTOR
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-type">
+      <div class="card type-card">
+        <button class="btn-back" onclick="goTo('screen-upload')">&#8592; Back</button>
+        <h1 class="card-title">SELECT QUIZ TYPE</h1>
+        <p class="card-subtitle">Choose how you want to be tested on your material</p>
+
+        <div class="type-grid">
+
+          <div class="type-option" onclick="selectType(this,'multiple-choice')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" stroke="#2d6a2d" stroke-width="2" fill="none"/><circle cx="18" cy="18" r="8" fill="#2d6a2d"/></svg>
+            </div>
+            <h3>Multiple Choice</h3>
+            <p>Pick the correct answer from 4 options. Classic format, great for broad review.</p>
+            <div class="type-tags">
+              <span class="tag">4 options</span>
+              <span class="tag">Auto-graded</span>
+            </div>
+          </div>
+
+          <div class="type-option" onclick="selectType(this,'true-false')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><rect x="2" y="2" width="32" height="32" rx="6" stroke="#2d6a2d" stroke-width="2" fill="none"/><text x="18" y="24" text-anchor="middle" font-size="14" font-family="DM Sans" fill="#2d6a2d" font-weight="600">T/F</text></svg>
+            </div>
+            <h3>True / False</h3>
+            <p>Decide whether a statement is true or false. Fast-paced and decisive.</p>
+            <div class="type-tags">
+              <span class="tag">2 options</span>
+              <span class="tag">Quick</span>
+            </div>
+          </div>
+
+          <div class="type-option" onclick="selectType(this,'identification')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><path d="M8 10h20M8 18h14M8 26h10" stroke="#2d6a2d" stroke-width="2.2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Identification</h3>
+            <p>Type the correct answer in your own words. Tests deep recall and understanding.</p>
+            <div class="type-tags">
+              <span class="tag">Open-ended</span>
+              <span class="tag">Typed answer</span>
+            </div>
+          </div>
+
+          <div class="type-option" onclick="selectType(this,'enumeration')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><text x="4" y="14" font-size="11" font-family="DM Sans" fill="#2d6a2d" font-weight="600">1.</text><text x="4" y="24" font-size="11" font-family="DM Sans" fill="#2d6a2d" font-weight="600">2.</text><text x="4" y="34" font-size="11" font-family="DM Sans" fill="#2d6a2d" font-weight="600">3.</text><line x1="18" y1="10" x2="34" y2="10" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="20" x2="34" y2="20" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="30" x2="34" y2="30" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Enumeration</h3>
+            <p>List all required items in order. Perfect for memorizing sequences and categories.</p>
+            <div class="type-tags">
+              <span class="tag">List-based</span>
+              <span class="tag">Ordered</span>
+            </div>
+          </div>
+
+          <div class="type-option" onclick="selectType(this,'matching')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><rect x="2" y="6" width="12" height="8" rx="2" stroke="#2d6a2d" stroke-width="2" fill="none"/><rect x="22" y="6" width="12" height="8" rx="2" stroke="#2d6a2d" stroke-width="2" fill="none"/><rect x="2" y="22" width="12" height="8" rx="2" stroke="#2d6a2d" stroke-width="2" fill="none"/><rect x="22" y="22" width="12" height="8" rx="2" stroke="#2d6a2d" stroke-width="2" fill="none"/><line x1="14" y1="10" x2="22" y2="26" stroke="#c8a43a" stroke-width="1.5" stroke-dasharray="3 2"/><line x1="14" y1="26" x2="22" y2="10" stroke="#c8a43a" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+            </div>
+            <h3>Matching Type</h3>
+            <p>Connect items in column A to their correct counterparts in column B.</p>
+            <div class="type-tags">
+              <span class="tag">Pairs</span>
+              <span class="tag">Drag & drop</span>
+            </div>
+          </div>
+
+          <div class="type-option" onclick="selectType(this,'mixed')">
+            <div class="type-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36"><path d="M6 18 Q18 4 30 18 Q18 32 6 18Z" stroke="#2d6a2d" stroke-width="2" fill="none"/><circle cx="18" cy="18" r="4" fill="#c8a43a"/></svg>
+            </div>
+            <h3>Mixed / Random</h3>
+            <p>A surprise blend of all question types. The ultimate challenge for full mastery.</p>
+            <div class="type-tags">
+              <span class="tag">All types</span>
+              <span class="tag">Random</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="type-settings">
+          <div class="form-group">
+            <label for="numQuestions">Number of Questions</label>
+            <select id="numQuestions">
+              <option>5</option>
+              <option selected>10</option>
+              <option>15</option>
+              <option>20</option>
+              <option>30</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+              <option>Easy</option>
+              <option selected>Medium</option>
+              <option>Hard</option>
+              <option>Mixed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="timeLimit">Time Limit</label>
+            <select id="timeLimit">
+              <option>No Limit</option>
+              <option>5 minutes</option>
+              <option selected>10 minutes</option>
+              <option>15 minutes</option>
+              <option>30 minutes</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnStart" onclick="startQuiz()" disabled>START QUIZ</button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN 3 · QUIZ IN PROGRESS
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-quiz">
+      <div class="quiz-header">
+        <div class="quiz-meta">
+          <span class="quiz-type-badge" id="quizTypeBadge"></span>
+          <span class="quiz-title-display" id="quizTitleDisplay"></span>
+        </div>
+        <div class="quiz-timer" id="quizTimer">10:00</div>
+      </div>
+
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progressFill"></div>
+      </div>
+      <div class="quiz-progress-label">
+        <span id="progressLabel">Question 1 of 10</span>
+        <span id="scoreLabel">Score: 0</span>
+      </div>
+
+      <!-- Multiple Choice -->
+      <div class="question-card" id="qMC" style="display:none">
+        <p class="q-number" id="mcNumber"></p>
+        <p class="q-text" id="mcText"></p>
+        <div class="mc-options" id="mcOptions"></div>
+        <button class="btn-next" id="mcNext" onclick="nextQuestion()" disabled>Next →</button>
+      </div>
+
+      <!-- True / False -->
+      <div class="question-card" id="qTF" style="display:none">
+        <p class="q-number" id="tfNumber"></p>
+        <p class="q-text" id="tfText"></p>
+        <div class="tf-options">
+          <button class="tf-btn" id="tfTrue" onclick="answerTF(true)">✓ True</button>
+          <button class="tf-btn" id="tfFalse" onclick="answerTF(false)">✗ False</button>
+        </div>
+        <button class="btn-next" id="tfNext" onclick="nextQuestion()" disabled>Next →</button>
+      </div>
+
+      <!-- Identification -->
+      <div class="question-card" id="qID" style="display:none">
+        <p class="q-number" id="idNumber"></p>
+        <p class="q-text" id="idText"></p>
+        <input type="text" class="id-input" id="idInput" placeholder="Type your answer here…" oninput="checkIdInput()" />
+        <button class="btn-next" id="idNext" onclick="nextQuestion()" disabled>Next →</button>
+      </div>
+
+      <!-- Enumeration -->
+      <div class="question-card" id="qEN" style="display:none">
+        <p class="q-number" id="enNumber"></p>
+        <p class="q-text" id="enText"></p>
+        <div class="enum-inputs" id="enumInputs"></div>
+        <button class="btn-next" id="enNext" onclick="nextQuestion()">Next →</button>
+      </div>
+
+      <!-- Matching -->
+      <div class="question-card" id="qMA" style="display:none">
+        <p class="q-number" id="maNumber"></p>
+        <p class="q-text" id="maText"></p>
+        <div class="matching-layout">
+          <div class="matching-col" id="matchColA"></div>
+          <div class="matching-col" id="matchColB"></div>
+        </div>
+        <button class="btn-next" id="maNext" onclick="nextQuestion()">Next →</button>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN 4 · RESULTS
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-results">
+      <div class="card results-card">
+        <div class="results-badge" id="resultsBadge"></div>
+        <h1 class="results-title" id="resultsTitle"></h1>
+        <p class="results-subtitle" id="resultsSubtitle"></p>
+
+        <div class="results-score-ring">
+          <svg viewBox="0 0 120 120" width="160" height="160">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#ddd" stroke-width="10"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#2d6a2d" stroke-width="10"
+              stroke-dasharray="314" stroke-dashoffset="314"
+              stroke-linecap="round" transform="rotate(-90 60 60)"
+              id="scoreRing"/>
+          </svg>
+          <div class="score-ring-text">
+            <span id="scorePercent">0%</span>
+            <small>Score</small>
+          </div>
+        </div>
+
+        <div class="results-stats">
+          <div class="stat-box">
+            <span id="statCorrect">0</span>
+            <label>Correct</label>
+          </div>
+          <div class="stat-box">
+            <span id="statWrong">0</span>
+            <label>Wrong</label>
+          </div>
+          <div class="stat-box">
+            <span id="statTime">—</span>
+            <label>Time Used</label>
+          </div>
+          <div class="stat-box">
+            <span id="statType">—</span>
+            <label>Quiz Type</label>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn-outline" onclick="reviewAnswers()">Review Answers</button>
+          <button class="btn-primary" onclick="goTo('screen-type')">Try Again</button>
+          <button class="btn-outline" onclick="goTo('screen-upload')">New Quiz</button>
+        </div>
+      </div>
+
+      <!-- Answer Review -->
+      <div class="review-section" id="reviewSection" style="display:none">
+        <h2 class="review-heading">Answer Review</h2>
+        <div id="reviewList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/assets/js/quizzes.js"></script>
+</body>
+</html>

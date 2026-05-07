@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASRS — Academic Subject Review System</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/log.css"/>
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <div class="card" id="main-card">
+
+    <!-- Logo -->
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="16" width="20" height="5" rx="2" fill="#F5A623"/>
+          <rect x="4" y="9" width="20" height="5" rx="2" fill="#fff" opacity="0.85"/>
+          <rect x="4" y="2" width="20" height="5" rx="2" fill="#F5A623" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">ASRS</span>
+        <span class="logo-sub">STUDENT PORTAL</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tab-login" role="tab" aria-selected="true" onclick="switchTab('login')">Log In</button>
+      <button class="tab" id="tab-register" role="tab" aria-selected="false" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="form-section" id="section-login">
+      <div class="form-group">
+        <label for="login-email">Email Address</label>
+        <input type="email" id="login-email" placeholder="student@asrs.edu" autocomplete="email"/>
+        <span class="field-error" id="err-login-email"></span>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <div class="input-wrap">
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"/>
+          <button type="button" class="toggle-pw" onclick="togglePw('login-password', this)" aria-label="Show password">
+            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <span class="field-error" id="err-login-password"></span>
+      </div>
+      <div class="forgot-row">
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+      <button class="btn-primary" id="btn-login" onclick="handleLogin()">Sign In to Dashboard</button>
+      <p class="switch-hint">Don't have an account? <a href="#" onclick="switchTab('register'); return false;">Register here</a></p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form-section hidden" id="section-register">
+
+      <div class="section-divider">FULL NAME</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-lastname">Last Name <span class="req">*</span></label>
+          <input type="text" id="reg-lastname" placeholder="dela Cruz"/>
+          <span class="field-error" id="err-reg-lastname"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-firstname">First Name <span class="req">*</span></label>
+          <input type="text" id="reg-firstname" placeholder="Juan"/>
+          <span class="field-error" id="err-reg-firstname"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-middlename">Middle Name</label>
+          <input type="text" id="reg-middlename" placeholder="Santos"/>
+        </div>
+        <div class="form-group">
+          <label for="reg-extension">Extension</label>
+          <select id="reg-extension">
+            <option value="">None</option>
+            <option value="Jr.">Jr.</option>
+            <option value="Sr.">Sr.</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-divider">ACADEMIC INFO</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-course">Course <span class="req">*</span></label>
+          <select id="reg-course">
+            <option value="">Select Course</option>
+            <option value="BSCS">BS Computer Science</option>
+            <option value="BSIT">BS Information Technology</option>
+            <option value="ACT AD">ACT Application Development</option>
+            <option value="BSIT">ACT Networking</option>
+
+          </select>
+          <span class="field-error" id="err-reg-course"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-schoolyear">School Year <span class="req">*</span></label>
+          <select id="reg-schoolyear">
+            <option value="">Select Year</option>
+            <option value="2024-2025">2024–2025</option>
+            <option value="2025-2026">2025–2026</option>
+            <option value="2026-2027">2026–2027</option>
+          </select>
+          <span class="field-error" id="err-reg-schoolyear"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-yearlevel">Year Level <span class="req">*</span></label>
+          <select id="reg-yearlevel">
+            <option value="">Select Level</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+          </select>
+          <span class="field-error" id="err-reg-yearlevel"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-section">Section <span class="req">*</span></label>
+          <select id="reg-section">
+            <option value="">Select Section</option>
+            <option value="A">Section A</option>
+            <option value="B">Section B</option>
+            <option value="C">Section C</option>
+            <option value="D">Section D</option>
+          </select>
+          <span class="field-error" id="err-reg-section"></span>
+        </div>
+      </div>
+
+      <div class="section-divider">ACCOUNT</div>
+      <div class="form-group">
+        <label for="reg-email">Email Address <span class="req">*</span></label>
+        <input type="email" id="reg-email" placeholder="your@email.com"/>
+        <span class="field-error" id="err-reg-email"></span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="reg-password">Password <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input type="password" id="reg-password" placeholder="Min. 8 characters"/>
+            <button type="button" class="toggle-pw" onclick="togglePw('reg-password', this)" aria-label="Show password">
+              <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error" id="err-reg-password"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-confirm">Confirm Password <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input type="password" id="reg-confirm" placeholder="Re-enter password"/>
+            <button type="button" class="toggle-pw" onclick="togglePw('reg-confirm', this)" aria-label="Show password">
+              <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error" id="err-reg-confirm"></span>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-register" onclick="handleRegister()">Create Student Account</button>
+      <p class="switch-hint">Already have an account? <a href="#" onclick="switchTab('login'); return false;">Log in here</a></p>
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/assets/js/log.js"></script>
+</body>
+</html>

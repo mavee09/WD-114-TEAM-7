@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASRS — My Quizzes</title>
+  <link rel="stylesheet" href="/assets/css/quiz.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="brand-icon">🎓</div>
+    <span class="brand-text">ASRS</span>
+  </div>
+  <ul class="navbar-links">
+    <li class="nav-item"><a href="home.html" class="nav-link"><i class="fas fa-house"></i><span>Dashboard</span></a></li>
+    <li class="nav-item active"><a href="#" class="nav-link"><i class="fas fa-book-open"></i><span>Quizzes</span></a></li>
+    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-gamepad"></i><span>Mini-Games</span></a></li>
+    <li class="nav-item"><a href="tasks.html" class="nav-link"><i class="fas fa-list-check"></i><span>Tasks</span></a></li>
+    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+  </ul>
+  <div class="navbar-right">
+    <div class="notif-wrapper">
+      <i class="fas fa-bell"></i>
+      <span class="notif-badge">3</span>
+    </div>
+    <div class="profile-wrapper">
+      <div class="avatar">MP</div>
+      <span class="profile-name">Ms. Perez</span>
+      <i class="fas fa-chevron-down chev"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO BANNER ═══════════ -->
+<section class="hero-banner">
+  <div class="hero-content">
+    <p class="hero-label">MY QUIZZES</p>
+    <h1 class="hero-title">Assigned by Your Teacher</h1>
+    <p class="hero-sub">Complete quizzes before their due dates to earn full points.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <i class="fas fa-clock"></i>
+      <div><span class="stat-num" id="pendingCount">3</span><span class="stat-lbl">Pending</span></div>
+    </div>
+    <div class="stat-pill">
+      <i class="fas fa-circle-check"></i>
+      <div><span class="stat-num" id="doneCount">2</span><span class="stat-lbl">Completed</span></div>
+    </div>
+    <div class="stat-pill">
+      <i class="fas fa-fire"></i>
+      <div><span class="stat-num">85%</span><span class="stat-lbl">Avg Score</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FILTER TABS ═══════════ -->
+<div class="page-wrap">
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Quizzes</button>
+    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+    <button class="filter-btn" data-filter="open">Open Now</button>
+    <button class="filter-btn" data-filter="completed">Completed</button>
+    <button class="filter-btn" data-filter="missed">Missed</button>
+    <div class="filter-spacer"></div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search quizzes…"/>
+    </div>
+  </div>
+
+  <!-- ═══════════ QUIZ CARDS GRID ═══════════ -->
+  <div class="quiz-grid" id="quizGrid">
+
+    <!-- CARD 1 — Open Now -->
+    <div class="quiz-card" data-status="open" data-subject="web">
+      <div class="card-top accent-green">
+        <div class="subject-tag"><i class="fas fa-code"></i> Web Development</div>
+        <span class="status-badge open"><i class="fas fa-circle-dot"></i> Open Now</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">HTML & CSS Fundamentals</h2>
+        <p class="quiz-desc">Covers semantic HTML, box model, flexbox, and CSS specificity. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 20 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 30 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 100 pts</div>
+        </div>
+        <div class="due-section">
+          <div class="due-label-row">
+            <span class="due-label"><i class="fas fa-calendar-xmark"></i> Due Date</span>
+            <span class="due-date" data-due="2026-05-08T23:59:00">May 8, 2026 — 11:59 PM</span>
+          </div>
+          <div class="countdown-bar-wrap">
+            <div class="countdown-bar open" style="width:70%"></div>
+          </div>
+          <div class="countdown-timer" data-due="2026-05-08T23:59:00" id="timer-1">
+            <span class="t-unit"><span class="t-val" id="d1">--</span><span class="t-lab">days</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="h1">--</span><span class="t-lab">hrs</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="m1">--</span><span class="t-lab">min</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="s1">--</span><span class="t-lab">sec</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-take" data-quiz-id="1" data-quiz-name="HTML &amp; CSS Fundamentals" data-questions='[
+          {"q":"What does HTML stand for?","options":["HyperText Markup Language","High Text Machine Language","HyperText Machine Language","HyperTool Markup Language"],"ans":0},
+          {"q":"Which CSS property controls the text size?","options":["font-weight","text-size","font-size","text-style"],"ans":2},
+          {"q":"Which HTML tag is used for the largest heading?","options":["<h6>","<head>","<h1>","<heading>"],"ans":2},
+          {"q":"What is the correct CSS syntax for making text bold?","options":["font-style:bold","text-weight:bold","font-weight:bold","bold:true"],"ans":2},
+          {"q":"Which property makes a flex container?","options":["display:flex","position:flex","float:flex","layout:flex"],"ans":0}
+        ]'>Take Quiz <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- CARD 2 — Upcoming -->
+    <div class="quiz-card" data-status="upcoming" data-subject="hci">
+      <div class="card-top accent-blue">
+        <div class="subject-tag"><i class="fas fa-desktop"></i> HCI</div>
+        <span class="status-badge upcoming"><i class="fas fa-hourglass-half"></i> Upcoming</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">User Experience Principles</h2>
+        <p class="quiz-desc">Nielsen's heuristics, Gestalt principles, and usability testing methods. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 25 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 45 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 120 pts</div>
+        </div>
+        <div class="due-section">
+          <div class="due-label-row">
+            <span class="due-label"><i class="fas fa-calendar-xmark"></i> Due Date</span>
+            <span class="due-date" data-due="2026-05-12T23:59:00">May 12, 2026 — 11:59 PM</span>
+          </div>
+          <div class="countdown-bar-wrap">
+            <div class="countdown-bar upcoming" style="width:30%"></div>
+          </div>
+          <div class="countdown-timer" data-due="2026-05-12T23:59:00" id="timer-2">
+            <span class="t-unit"><span class="t-val" id="d2">--</span><span class="t-lab">days</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="h2">--</span><span class="t-lab">hrs</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="m2">--</span><span class="t-lab">min</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="s2">--</span><span class="t-lab">sec</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-take locked" disabled>
+          <i class="fas fa-lock"></i> Not Yet Open
+        </button>
+      </div>
+    </div>
+
+    <!-- CARD 3 — Upcoming -->
+    <div class="quiz-card" data-status="upcoming" data-subject="web">
+      <div class="card-top accent-gold">
+        <div class="subject-tag"><i class="fas fa-code"></i> Web Development</div>
+        <span class="status-badge upcoming"><i class="fas fa-hourglass-half"></i> Upcoming</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">JavaScript ES6+ Features</h2>
+        <p class="quiz-desc">Arrow functions, destructuring, promises, async/await, and modules. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 30 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 60 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 150 pts</div>
+        </div>
+        <div class="due-section">
+          <div class="due-label-row">
+            <span class="due-label"><i class="fas fa-calendar-xmark"></i> Due Date</span>
+            <span class="due-date">May 15, 2026 — 11:59 PM</span>
+          </div>
+          <div class="countdown-bar-wrap">
+            <div class="countdown-bar upcoming" style="width:15%"></div>
+          </div>
+          <div class="countdown-timer" data-due="2026-05-15T23:59:00" id="timer-3">
+            <span class="t-unit"><span class="t-val" id="d3">--</span><span class="t-lab">days</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="h3">--</span><span class="t-lab">hrs</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="m3">--</span><span class="t-lab">min</span></span>
+            <span class="t-sep">:</span>
+            <span class="t-unit"><span class="t-val" id="s3">--</span><span class="t-lab">sec</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-take locked" disabled><i class="fas fa-lock"></i> Not Yet Open</button>
+      </div>
+    </div>
+
+    <!-- CARD 4 — Completed -->
+    <div class="quiz-card" data-status="completed" data-subject="web">
+      <div class="card-top accent-gray">
+        <div class="subject-tag"><i class="fas fa-code"></i> Web Development</div>
+        <span class="status-badge completed"><i class="fas fa-circle-check"></i> Completed</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">Web Development Quiz 2</h2>
+        <p class="quiz-desc">HTTP methods, REST APIs, and JSON fundamentals. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 20 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 30 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 100 pts</div>
+        </div>
+        <div class="score-section">
+          <div class="score-label">YOUR SCORE</div>
+          <div class="score-display">
+            <div class="score-ring">
+              <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="24" class="ring-bg"/><circle cx="30" cy="30" r="24" class="ring-fill" style="stroke-dasharray:108 151; stroke:#22c55e"/></svg>
+              <span class="score-pct">88%</span>
+            </div>
+            <div class="score-details">
+              <p><strong>88 / 100 pts</strong></p>
+              <p class="score-rank">Rank: <strong>#3</strong> in class</p>
+              <p class="score-sub">Submitted Apr 28, 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-review">Review Answers <i class="fas fa-eye"></i></button>
+      </div>
+    </div>
+
+    <!-- CARD 5 — Completed -->
+    <div class="quiz-card" data-status="completed" data-subject="hci">
+      <div class="card-top accent-gray">
+        <div class="subject-tag"><i class="fas fa-desktop"></i> HCI</div>
+        <span class="status-badge completed"><i class="fas fa-circle-check"></i> Completed</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">HCI Foundations Quiz</h2>
+        <p class="quiz-desc">Input devices, human perception, and interaction models. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 15 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 25 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 80 pts</div>
+        </div>
+        <div class="score-section">
+          <div class="score-label">YOUR SCORE</div>
+          <div class="score-display">
+            <div class="score-ring">
+              <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="24" class="ring-bg"/><circle cx="30" cy="30" r="24" class="ring-fill" style="stroke-dasharray:121 151; stroke:#c9a84c"/></svg>
+              <span class="score-pct">80%</span>
+            </div>
+            <div class="score-details">
+              <p><strong>64 / 80 pts</strong></p>
+              <p class="score-rank">Rank: <strong>#5</strong> in class</p>
+              <p class="score-sub">Submitted Apr 20, 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-review">Review Answers <i class="fas fa-eye"></i></button>
+      </div>
+    </div>
+
+    <!-- CARD 6 — Missed -->
+    <div class="quiz-card" data-status="missed" data-subject="web">
+      <div class="card-top accent-red">
+        <div class="subject-tag"><i class="fas fa-code"></i> Web Development</div>
+        <span class="status-badge missed"><i class="fas fa-triangle-exclamation"></i> Missed</span>
+      </div>
+      <div class="card-body">
+        <h2 class="quiz-name">Web Dev Quiz 1 — Intro</h2>
+        <p class="quiz-desc">Internet basics, browsers, and the client-server model. Assigned by Ms. Perez.</p>
+        <div class="quiz-meta-row">
+          <div class="meta-item"><i class="fas fa-question-circle"></i> 10 Questions</div>
+          <div class="meta-item"><i class="fas fa-clock"></i> 15 mins</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 50 pts</div>
+        </div>
+        <div class="missed-section">
+          <i class="fas fa-calendar-xmark missed-icon"></i>
+          <div>
+            <p class="missed-title">Deadline Passed</p>
+            <p class="missed-sub">Due Apr 25, 2026 — 11:59 PM</p>
+            <p class="missed-note">Contact Ms. Perez to request late submission.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="teacher-row"><div class="teacher-av">MP</div><span>Ms. Perez</span></div>
+        <button class="btn-contact"><i class="fas fa-envelope"></i> Contact Teacher</button>
+      </div>
+    </div>
+
+  </div><!-- /quiz-grid -->
+
+  <!-- Empty State -->
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <i class="fas fa-inbox"></i>
+    <p>No quizzes match your filter.</p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+
+<!-- ═══════════ QUIZ MODAL ═══════════ -->
+<div class="modal-overlay" id="quizModal">
+  <div class="modal-box">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div>
+        <p class="modal-label">QUIZ</p>
+        <h2 class="modal-title" id="modalTitle">HTML & CSS Fundamentals</h2>
+      </div>
+      <button class="modal-close" id="modalClose"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="modal-progress-wrap">
+      <div class="modal-progress-bar" id="modalProgressBar" style="width:0%"></div>
+    </div>
+    <div class="modal-progress-label">
+      <span id="qLabel">Question 1 of 5</span>
+      <span id="timerLabel">⏱ 30:00</span>
+    </div>
+
+    <!-- Question Area -->
+    <div class="question-area" id="questionArea">
+      <p class="question-text" id="questionText">Loading…</p>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="modal-nav">
+      <button class="btn-nav" id="prevBtn" disabled><i class="fas fa-arrow-left"></i> Prev</button>
+      <div class="dot-indicators" id="dotIndicators"></div>
+      <button class="btn-nav primary" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ RESULT MODAL ═══════════ -->
+<div class="modal-overlay" id="resultModal">
+  <div class="modal-box result-box">
+    <div class="result-icon" id="resultIcon">🎉</div>
+    <h2 class="result-title" id="resultTitle">Quiz Submitted!</h2>
+    <p class="result-sub" id="resultSub">Here's how you did:</p>
+    <div class="result-score-ring">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" class="ring-bg"/>
+        <circle cx="60" cy="60" r="50" class="ring-fill" id="resultRingFill" style="stroke-dasharray:0 314"/>
+      </svg>
+      <span class="result-pct" id="resultPct">0%</span>
+    </div>
+    <p class="result-detail" id="resultDetail"></p>
+    <div class="result-btns">
+      <button class="btn-take" id="resultClose">Back to Quizzes</button>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/quiz.js"></script>
+</body>
+</html>
