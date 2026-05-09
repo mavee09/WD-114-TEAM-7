@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASRS — Academic Subject Review System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/home.css"/>
+</head>
+<body>
+
+  <!--  NAVBAR  -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+      <span class="brand-text">ASRS</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="home.html" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="quizzes.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Quizzes</a></li>
+      <li><a href="minigames.html" class="nav-link"><i class="fas fa-gamepad"></i> Mini-Games</a></li>
+      <li><a href="join-class.html" class="nav-link"><i class="fas fa-key"></i> Join Class</a></li>
+      <li><a href="tasks.html" class="nav-link"><i class="fas fa-tasks"></i> Tasks</a></li>
+      <li><a href="lessons.html" class="nav-link"><i class="fas fa-book-open"></i> Lessons</a></li>
+      <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <!-- NOTIFICATION BELL -->
+      <div class="notif-wrapper" id="notifWrapper">
+        <button class="notif-btn" id="notifBtn" onclick="toggleNotifications()">
+          <i class="fas fa-bell"></i>
+          <span class="notif-badge" id="notifBadge">3</span>
+        </button>
+
+        <div class="notif-dropdown" id="notifDropdown">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button class="mark-all" onclick="markAllRead()">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notifList">
+            <div class="notif-item unread" onclick="markRead(this)">
+              <div class="notif-icon quiz"><i class="fas fa-clipboard-check"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">New Quiz Available</p>
+                <p class="notif-desc">Web Development Quiz 3 is now live!</p>
+                <span class="notif-time">2 mins ago</span>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread" onclick="markRead(this)">
+              <div class="notif-icon trophy"><i class="fas fa-trophy"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Achievement Unlocked!</p>
+                <p class="notif-desc">You earned the "Quiz Master" badge.</p>
+                <span class="notif-time">1 hour ago</span>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread" onclick="markRead(this)">
+              <div class="notif-icon task"><i class="fas fa-bell"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Task Reminder</p>
+                <p class="notif-desc">Daily challenge resets in 3 hours.</p>
+                <span class="notif-time">3 hours ago</span>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item" onclick="markRead(this)">
+              <div class="notif-icon info"><i class="fas fa-info-circle"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Ms. Perez posted resources</p>
+                <p class="notif-desc">New study materials added to HCI lesson.</p>
+                <span class="notif-time">Yesterday</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="notif-footer">View all notifications <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- USER AVATAR -->
+      <div class="user-menu" id="userMenu">
+        <button class="user-avatar-btn" onclick="toggleUserMenu()">
+          <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ms.Perez&backgroundColor=1a4a2e&fontFamily=Georgia&fontSize=40&fontWeight=700&textColor=ffffff" alt="Ms. Perez" class="user-avatar"/>
+          <span class="user-name">Ms. Perez</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <a href="profile.html" onclick="closeMenus()"><i class="fas fa-user"></i> My Profile</a>
+          <a href="settings.html" onclick="closeMenus()"><i class="fas fa-cog"></i> Settings</a>
+          <div class="divider"></div>
+          <a href="login.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--  HERO BAR  -->
+  <section class="hero">
+    <div class="hero-bg-text">LEARN</div>
+    <div class="hero-content">
+      <div class="hero-greeting">
+        <span class="greeting-label">Good afternoon,</span>
+        <h1 class="hero-title">Ms. Perez <span class="wave">👋</span></h1>
+        <p class="hero-sub">Make Learning Fun &amp; Engaging — Let's keep that streak going!</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num">Level 4</span>
+          <span class="stat-label">Current Rank</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <span class="stat-num">450<span class="stat-small">/600</span></span>
+          <span class="stat-label">Points</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <span class="stat-num">7🔥</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-progress-bar">
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 75%"></div>
+      </div>
+      <span class="progress-label">75% to Level 5</span>
+    </div>
+  </section>
+
+  <!--  MAIN GRID  -->
+  <main class="main-grid">
+
+    <!-- LEFT COLUMN -->
+    <aside class="left-col">
+
+      <!-- Progress Card -->
+      <div class="card progress-card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+        </div>
+        <div class="badge-display">
+          <div class="badge-medal">
+            <i class="fas fa-medal"></i>
+            <div class="badge-shine"></div>
+          </div>
+          <div class="badge-info">
+            <span class="badge-level">Level 4</span>
+            <span class="badge-pts">450 / 600 pts</span>
+          </div>
+        </div>
+        <div class="mini-progress">
+          <div class="mini-bar"><div class="mini-fill" style="width:75%"></div></div>
+          <span>75%</span>
+        </div>
+        <div class="progress-subjects">
+          <div class="subj-row">
+            <span>Web Dev</span>
+            <div class="subj-bar"><div class="subj-fill" style="width:88%"></div></div>
+            <span>88%</span>
+          </div>
+          <div class="subj-row">
+            <span>HCI</span>
+            <div class="subj-bar"><div class="subj-fill" style="width:65%"></div></div>
+            <span>65%</span>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Top Students -->
+      <div class="card leaderboard-card">
+        <div class="card-header">
+          <h3><i class="fas fa-crown"></i> Top Students</h3>
+          <a href="reports.html" class="view-all">See all</a>
+        </div>
+        <ul class="leaderboard-list">
+          <li class="lb-item gold">
+            <span class="lb-rank">01</span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=Aviv&backgroundColor=c9a84c" alt="Aviv" class="lb-avatar"/>
+            <span class="lb-name">Aviv</span>
+            <span class="lb-pts">100 pts</span>
+          </li>
+          <li class="lb-item silver">
+            <span class="lb-rank">02</span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=Marianne&backgroundColor=7a7a7a" alt="Marianne" class="lb-avatar"/>
+            <span class="lb-name">Marianne</span>
+            <span class="lb-pts">97 pts</span>
+          </li>
+          <li class="lb-item bronze">
+            <span class="lb-rank">03</span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=Wilmalyn&backgroundColor=8b6340" alt="Wilmalyn" class="lb-avatar"/>
+            <span class="lb-name">Wilmalyn</span>
+            <span class="lb-pts">90 pts</span>
+          </li>
+          <li class="lb-item">
+            <span class="lb-rank">04</span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=C&backgroundColor=1a4a2e" alt="Christiaan" class="lb-avatar"/>
+            <span class="lb-name">Christiaan</span>
+            <span class="lb-pts">85 pts</span>
+          </li>
+          <li class="lb-item">
+            <span class="lb-rank">05</span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=K&backgroundColor=2c6e49" alt="Kurt" class="lb-avatar"/>
+            <span class="lb-name">Kurt</span>
+            <span class="lb-pts">80 pts</span>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CENTER COLUMN -->
+    <section class="center-col">
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="quizzes.html" class="action-btn quiz-btn">
+          <div class="action-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="action-text">
+            <span class="action-title">Generate a Quiz!</span>
+            <span class="action-sub">Test your knowledge</span>
+          </div>
+          <i class="fas fa-arrow-right action-arrow"></i>
+        </a>
+        <a href="minigames.html" class="action-btn game-btn">
+          <div class="action-icon"><i class="fas fa-gamepad"></i></div>
+          <div class="action-text">
+            <span class="action-title">Play a Mini-Game!</span>
+            <span class="action-sub">Learn while having fun</span>
+          </div>
+          <i class="fas fa-arrow-right action-arrow"></i>
+        </a>
+      </div>
+
+      <!-- Daily Challenges -->
+      <div class="card challenges-card">
+        <div class="card-header">
+          <h3><i class="fas fa-fire-alt"></i> Daily Challenges</h3>
+          <span class="chip">Resets in 5h</span>
+        </div>
+        <div class="challenge-grid">
+          <div class="challenge-item" onclick="startChallenge(this, 'quiz')">
+            <div class="challenge-icon"><i class="fas fa-clipboard-check"></i></div>
+            <p class="challenge-task">Complete 1 Quiz</p>
+            <p class="challenge-reward">+10 pts</p>
+            <div class="challenge-check"><i class="fas fa-check"></i></div>
+          </div>
+          <div class="challenge-item" onclick="startChallenge(this, 'game')">
+            <div class="challenge-icon"><i class="fas fa-gamepad"></i></div>
+            <p class="challenge-task">Play 1 Mini-Game</p>
+            <p class="challenge-reward">+5 pts</p>
+            <div class="challenge-check"><i class="fas fa-check"></i></div>
+          </div>
+          <div class="challenge-item done" onclick="startChallenge(this, 'lesson')">
+            <div class="challenge-icon"><i class="fas fa-book-open"></i></div>
+            <p class="challenge-task">Review 1 Lesson</p>
+            <p class="challenge-reward">+7 pts</p>
+            <div class="challenge-check"><i class="fas fa-check"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson Library -->
+      <div class="card lessons-card">
+        <div class="card-header">
+          <h3><i class="fas fa-layer-group"></i> Lesson Library</h3>
+          <a href="lessons.html" class="view-all">Browse all</a>
+        </div>
+        <div class="lessons-grid">
+          <div class="lesson-item">
+            <div class="lesson-cover webdev">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="lesson-info">
+              <span class="lesson-tag">CS</span>
+              <h4>Web Development</h4>
+              <p>HTML, CSS, JavaScript & more</p>
+              <div class="lesson-progress">
+                <div class="lp-bar"><div class="lp-fill" style="width:88%"></div></div>
+                <span>88%</span>
+              </div>
+            </div>
+            <a href="lesson-detail.html?course=webdev" class="lesson-btn">Continue <i class="fas fa-play"></i></a>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-cover hci">
+              <i class="fas fa-mouse-pointer"></i>
+            </div>
+            <div class="lesson-info">
+              <span class="lesson-tag">CS</span>
+              <h4>Human-Computer Interaction</h4>
+              <p>UX principles & interface design</p>
+              <div class="lesson-progress">
+                <div class="lp-bar"><div class="lp-fill" style="width:65%"></div></div>
+                <span>65%</span>
+              </div>
+            </div>
+            <a href="lesson-detail.html?course=hci" class="lesson-btn">Continue <i class="fas fa-play"></i></a>
+          </div>
+          <div class="lesson-item locked">
+            <div class="lesson-cover locked-cover">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="lesson-info">
+              <span class="lesson-tag">THE INTERACTION</span>
+              <h4>Human-Computer Interaction</h4>
+              <p>Unlock at Level 5</p>
+              <div class="lesson-progress">
+                <div class="lp-bar"><div class="lp-fill" style="width:0%"></div></div>
+                <span>Locked</span>
+              </div>
+            </div>
+            <a href="#" class="lesson-btn disabled"><i class="fas fa-lock"></i> Locked</a>
+          </div>
+        </div>
+        <a href="lessons.html" class="share-more-btn"><i class="fas fa-plus"></i> Show More Lessons</a>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN -->
+    <aside class="right-col">
+
+      <!-- Study Tips -->
+      <div class="card tips-card">
+        <div class="card-header">
+          <h3><i class="fas fa-book-reader"></i> Study Tips &amp; Resources</h3>
+        </div>
+        <div class="tip-display">
+          <div class="tip-icon-wrap"><i class="fas fa-lightbulb"></i></div>
+          <blockquote class="tip-text" id="tipText">
+            "Spaced repetition is the most efficient learning technique. Review material at increasing intervals."
+          </blockquote>
+          <button class="next-tip-btn" onclick="nextTip()">Next Tip <i class="fas fa-rotate-right"></i></button>
+        </div>
+        <div class="resource-links">
+          <a href="#" class="resource-link"><i class="fas fa-file-pdf"></i> Study Guide PDF</a>
+          <a href="#" class="resource-link"><i class="fas fa-video"></i> Video Tutorials</a>
+          <a href="#" class="resource-link"><i class="fas fa-link"></i> Reference Links</a>
+        </div>
+      </div>
+
+      <!-- Upcoming -->
+      <div class="card upcoming-card">
+        <div class="card-header">
+          <h3><i class="fas fa-calendar-alt"></i> Upcoming</h3>
+        </div>
+        <ul class="upcoming-list">
+          <li class="upcoming-item">
+            <div class="up-date">
+              <span class="up-day">06</span>
+              <span class="up-month">MAY</span>
+            </div>
+            <div class="up-info">
+              <p class="up-title">Web Dev Midterm Quiz</p>
+              <p class="up-sub">10 questions • 30 min</p>
+            </div>
+            <span class="up-tag quiz-tag">Quiz</span>
+          </li>
+          <li class="upcoming-item">
+            <div class="up-date">
+              <span class="up-day">10</span>
+              <span class="up-month">MAY</span>
+            </div>
+            <div class="up-info">
+              <p class="up-title">HCI Project Deadline</p>
+              <p class="up-sub">Submit via portal</p>
+            </div>
+            <span class="up-tag task-tag">Task</span>
+          </li>
+    
+        </ul>
+      </div>
+
+    </aside>
+  </main>
+
+  <!--  FOOTER  -->
+  <footer class="footer">
+    <div class="footer-left">
+      <div class="footer-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Academic Subject Review System</span>
+      </div>
+      <p class="footer-copy">© 2026 ASRS · All Rights Reserved</p>
+    </div>
+    <div class="footer-links">
+      <a href="help.html">Help Center</a>
+      <a href="landing.html#contact">Contact</a>
+      <a href="landing.html#about">About</a>
+      <a href="landing.html#privacy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../assets/js/home.js"></script>
+</body>
+</html>
