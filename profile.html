@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASRS — My Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/shared.css"/>
+    <link rel="stylesheet" href="../assets/css/profile.css"/>
+
+</head>
+<body>
+
+<nav class="app-nav">
+  <a href="home.html" class="nav-brand">
+    <div class="brand-badge"><i class="fas fa-graduation-cap"></i></div>
+    <span class="brand-name">ASRS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a href="quizzes.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Quizzes</a></li>
+    <li><a href="minigames.html" class="nav-link"><i class="fas fa-gamepad"></i> Mini-Games</a></li>
+    <li><a href="join-class.html" class="nav-link"><i class="fas fa-key"></i> Join Class</a></li>
+    <li><a href="tasks.html" class="nav-link"><i class="fas fa-tasks"></i> Tasks</a></li>
+    <li><a href="lesson-detail.html" class="nav-link"><i class="fas fa-book-open"></i> Lessons</a></li>
+    <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="notif-wrapper" id="notifWrapper">
+      <button class="notif-btn" onclick="toggleNotifications()"><i class="fas fa-bell"></i><span class="notif-badge" id="notifBadge">3</span></button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header"><span>Notifications</span><button class="mark-all" onclick="markAllRead()">Mark all read</button></div>
+        <div class="notif-list">
+          <div class="notif-item unread" onclick="markRead(this)"><div class="notif-icon quiz"><i class="fas fa-clipboard-check"></i></div><div class="notif-content"><p class="notif-title">New Quiz Available</p><p class="notif-desc">Web Development Quiz 3 is now live!</p><span class="notif-time">2 mins ago</span></div><div class="unread-dot"></div></div>
+        </div>
+        <a href="#" class="notif-footer">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="user-menu" id="userMenu">
+      <button class="user-avatar-btn" onclick="toggleUserMenu()">
+        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ms.Perez&backgroundColor=1a4a2e&fontFamily=Georgia&fontSize=40&fontWeight=700&textColor=ffffff" alt="Ms. Perez" class="user-avatar"/>
+        <span class="user-name">Ms. Perez</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="profile.html" onclick="closeMenus()"><i class="fas fa-user"></i> My Profile</a>
+        <a href="settings.html" onclick="closeMenus()"><i class="fas fa-cog"></i> Settings</a>
+        <div class="divider"></div>
+        <a href="login.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="profile-hero">
+  <div class="hero-inner">
+    <div class="avatar-section">
+      <div class="avatar-wrap">
+        <img id="profile-avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=Student&backgroundColor=1a4a2e&fontFamily=Georgia&fontSize=40&fontWeight=700&textColor=ffffff" alt="Student avatar"/>
+        <div class="avatar-edit" onclick="showToast('Avatar upload coming soon!')"><i class="fas fa-camera"></i></div>
+      </div>
+      <div class="profile-meta">
+        <h1 id="profile-name">Student</h1>
+        <span class="role-badge" id="profile-role"><i class="fas fa-user-graduate"></i> Student · ASRS Learner</span>
+        <p class="join-date" id="profile-join-date"><i class="fas fa-calendar" style="margin-right:.4rem"></i>Member since —</p>
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <button class="tab-btn active" onclick="switchTab('overview')"><i class="fas fa-user" style="margin-right:.4rem"></i>Overview</button>
+      <button class="tab-btn" onclick="switchTab('activity')"><i class="fas fa-history" style="margin-right:.4rem"></i>Activity</button>
+      <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-cog" style="margin-right:.4rem"></i>Settings</button>
+    </div>
+  </div>
+</div>
+
+<div class="profile-content">
+
+  <!-- OVERVIEW TAB -->
+  <div class="tab-panel active" id="tab-overview">
+    <div class="stats-row">
+      <div class="stat-box"><span class="num">450</span><span class="lbl">Total Points</span></div>
+      <div class="stat-box"><span class="num">7🔥</span><span class="lbl">Day Streak</span></div>
+      <div class="stat-box"><span class="num">Lv.4</span><span class="lbl">Current Level</span></div>
+      <div class="stat-box"><span class="num">18</span><span class="lbl">Quizzes Done</span></div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h3><i class="fas fa-chart-bar"></i> Subject Progress</h3>
+        <div class="subject-row"><span>Web Dev</span><div class="s-bar"><div class="s-fill" style="width:88%"></div></div><span>88%</span></div>
+        <div class="subject-row"><span>HCI</span><div class="s-bar"><div class="s-fill" style="width:65%"></div></div><span>65%</span></div>
+        <div class="subject-row"><span>Networks</span><div class="s-bar"><div class="s-fill" style="width:40%"></div></div><span>40%</span></div>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-medal"></i> Badges Earned</h3>
+        <div class="badge-row">
+          <div class="badge-pill"><i class="fas fa-trophy"></i> Quiz Master</div>
+          <div class="badge-pill"><i class="fas fa-fire"></i> 7-Day Streak</div>
+          <div class="badge-pill"><i class="fas fa-star"></i> Top Scorer</div>
+          <div class="badge-pill"><i class="fas fa-bolt"></i> Speed Run</div>
+          <div class="badge-pill"><i class="fas fa-graduation-cap"></i> Level 4</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1.5rem">
+      <h3><i class="fas fa-id-card"></i> Academic Info</h3>
+      <div class="subject-row"><span>Course</span><span id="overview-course">—</span></div>
+      <div class="subject-row"><span>School Year</span><span id="overview-school-year">—</span></div>
+      <div class="subject-row"><span>Year Level</span><span id="overview-year-level">—</span></div>
+      <div class="subject-row"><span>Section</span><span id="overview-section">—</span></div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY TAB -->
+  <div class="tab-panel" id="tab-activity">
+    <div class="card">
+      <h3><i class="fas fa-history"></i> Recent Activity</h3>
+      <div class="activity-list">
+        <div class="act-item">
+          <div class="act-icon quiz"><i class="fas fa-clipboard-check"></i></div>
+          <div><div class="act-title">Completed Web Dev Quiz 3</div><div class="act-time">Today, 2:30 PM</div></div>
+          <span class="act-pts">+10 pts</span>
+        </div>
+        <div class="act-item">
+          <div class="act-icon badge"><i class="fas fa-trophy"></i></div>
+          <div><div class="act-title">Earned "Quiz Master" Badge</div><div class="act-time">Today, 2:31 PM</div></div>
+          <span class="act-pts">🏆</span>
+        </div>
+        <div class="act-item">
+          <div class="act-icon game"><i class="fas fa-gamepad"></i></div>
+          <div><div class="act-title">Played Flashcard Blitz</div><div class="act-time">Yesterday, 6:00 PM</div></div>
+          <span class="act-pts">+5 pts</span>
+        </div>
+        <div class="act-item">
+          <div class="act-icon quiz"><i class="fas fa-book-open"></i></div>
+          <div><div class="act-title">Reviewed HCI Lesson 4</div><div class="act-time">Yesterday, 4:45 PM</div></div>
+          <span class="act-pts">+7 pts</span>
+        </div>
+        <div class="act-item">
+          <div class="act-icon quiz"><i class="fas fa-clipboard-check"></i></div>
+          <div><div class="act-title">Completed HCI Quiz 2</div><div class="act-time">May 5, 10:00 AM</div></div>
+          <span class="act-pts">+10 pts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="tab-panel" id="tab-settings">
+    <div class="two-col">
+      <div>
+        <div class="card" style="margin-bottom:1.5rem">
+          <h3><i class="fas fa-user-edit"></i> Edit Profile</h3>
+          <div class="settings-section">
+            <div class="form-group"><label>Full Name</label><input id="edit-full-name" type="text" value=""/></div>
+            <div class="form-group"><label>Email Address</label><input id="edit-email" type="email" value=""/></div>
+            <div class="form-group">
+              <label>Learning Track</label>
+              <select id="edit-track">
+                <option>General Learner</option>
+                <option>Web Development</option>
+                <option>Human-Computer Interaction</option>
+                <option>Computer Science</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Course</label>
+              <select id="edit-course">
+                <option value="">Select Course</option>
+                <option value="BSIT">BSIT</option>
+                <option value="BSCS">BSCS</option>
+                <option value="BSEMC">BSEMC</option>
+                <option value="ACT AD">ACT AD</option>
+                <option value="ACT NT">ACT NT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>School Year</label>
+              <select id="edit-school-year">
+                <option value="">Select Year</option>
+                <option value="2024–2025">2024–2025</option>
+                <option value="2025–2026">2025–2026</option>
+                <option value="2026–2027">2026–2027</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Year Level</label>
+              <select id="edit-year-level">
+                <option value="">Select Level</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Section</label>
+              <select id="edit-section">
+                <option value="">Select Section</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3><i class="fas fa-bell"></i> Notification Preferences</h3>
+          <div class="toggle-row"><span>New Quiz Available</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Achievement Unlocked</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Task Reminders</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+          <div class="toggle-row" style="border-bottom:none"><span>Daily Challenge Reset</span><label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+          <div style="margin-top:1.2rem">
+            <button class="save-btn" onclick="showToast('Preferences saved!')">Save Preferences</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="app-footer">
+  <div>
+    <div class="footer-brand"><i class="fas fa-graduation-cap"></i> Academic Subject Review System</div>
+    <p class="footer-copy">© 2026 ASRS · All Rights Reserved</p>
+  </div>
+  <div class="footer-links">
+    <a href="home.html">Dashboard</a>
+    <a href="landing.html#contact">Contact</a>
+    <a href="landing.html#about">About</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../assets/js/shared.js"></script>
+
+<script src="../assets/js/profile.js"></script>
+</body>
+</html>

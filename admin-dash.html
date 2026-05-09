@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASRS – Teacher Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/admindash.css">
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-logo-badge">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div>
+        <div class="auth-logo-title">ASRS</div>
+        <div class="auth-logo-sub">Academic Subject Review System</div>
+      </div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Sign In</button>
+      <button class="auth-tab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="tab-login">
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" id="login-email" placeholder="teacher@school.edu" value="teacher@asrs.edu">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="login-password" placeholder="••••••••" value="password123">
+      </div>
+      <button class="btn-primary" onclick="handleLogin()">Sign In to Dashboard</button>
+      <div class="auth-error" id="login-error">Invalid email or password. Please try again.</div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="tab-register" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" id="reg-name" placeholder="Ms. Maria Santos">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" id="reg-email" placeholder="teacher@school.edu">
+      </div>
+      <div class="form-group">   
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="reg-password" placeholder="Min. 8 characters">
+      </div>
+      <div class="form-group">
+        <label class="form-label">School / Institution</label>
+        <input type="text" class="form-input" id="reg-school" placeholder="Western Mindanao Academy">
+      </div>
+      <button class="btn-primary" onclick="handleRegister()">Create Teacher Account</button>
+      <div class="auth-error" id="reg-error">Please fill in all fields.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-badge">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="sidebar-brand-text">
+          <div class="brand-name">ASRS</div>
+          <div class="brand-sub">Teacher Dashboard</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-teacher">
+      <div class="teacher-avatar" id="sidebar-avatar">M</div>
+      <div class="teacher-info">
+        <div class="teacher-name" id="sidebar-name">Ms. Teacher</div>
+        <div class="teacher-role">Educator · Active</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item active" onclick="navigate('dashboard',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="navigate('classes',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16M4 4h16M4 12h16M9 4v16M15 4v16"/></svg>
+        My Classes
+      </div>
+      <div class="nav-item" onclick="navigate('students',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="18" cy="8" r="3"/><path d="M21 21v-2a3 3 0 00-2.25-2.9"/></svg>
+        Students
+        <span class="nav-badge" id="pending-badge">3</span>
+      </div>
+      <div class="nav-item" id="nav-notifications" onclick="navigate('notifications',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        Notifications
+      </div>
+      <div class="nav-section-label" style="margin-top:12px">Academics</div>
+      <div class="nav-item" onclick="navigate('quizzes',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Quizzes
+      </div>
+      <div class="nav-item" onclick="navigate('assignments',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Assignments
+      </div>
+      <div class="nav-section-label" style="margin-top:12px">Analytics</div>
+      <div class="nav-item" onclick="navigate('rankings',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Rankings & Scores
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="handleLogout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div>
+          <div class="page-title" id="topbar-title">Dashboard</div>
+          <div class="page-breadcrumb">ASRS Teacher Portal</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="navigate('notifications',document.getElementById('nav-notifications'))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="topbar-user">
+          <button class="topbar-avatar" type="button" aria-label="Account menu">
+            <span id="topbar-avatar">M</span>
+          </button>
+          <div class="topbar-user-dropdown">
+            <button type="button" onclick="openTeacherProfileFromHeader()"><i class="fas fa-user"></i> My Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ===== PAGE: DASHBOARD ===== -->
+      <div class="page active" id="page-dashboard">
+        <div style="margin-bottom:24px;">
+          <h1 style="font-size:24px;font-weight:800;color:var(--text-dark);">Good morning, <span id="dash-name">Teacher</span>! 👋</h1>
+          <p style="color:var(--text-soft);font-size:14px;margin-top:4px;">Here's what's happening in your classes today.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+            </div>
+            <div>
+              <div class="stat-value">42</div>
+              <div class="stat-label">Total Students</div>
+              <div class="stat-change up">↑ 3 this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
+            <div>
+              <div class="stat-value">8</div>
+              <div class="stat-label">Active Quizzes</div>
+              <div class="stat-change up">↑ 2 new</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <div class="stat-value">5</div>
+              <div class="stat-label">Assignments</div>
+              <div class="stat-change up">↑ 1 new</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Pending Approval</div>
+              <div class="stat-change down">Needs review</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <div class="section-title">📋 Recent Activity</div>
+                <div class="section-sub">Latest student submissions</div>
+              </div>
+            </div>
+            <div id="recent-activity"></div>
+          </div>
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <div class="section-title">🔔 Pending Approvals</div>
+                <div class="section-sub">Students waiting to join your class</div>
+              </div>
+            </div>
+            <div id="pending-list"></div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="section-header">
+              <div class="section-title">📊 Class Performance</div>
+            </div>
+            <div class="bar-chart" id="perf-chart"></div>
+            <div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-soft);"><span style="width:12px;height:12px;border-radius:3px;background:var(--green-light);display:inline-block;"></span>Average Score</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-header">
+              <div class="section-title">⏰ Due Soon</div>
+              <div class="section-sub">Next 7 days</div>
+            </div>
+            <div id="due-soon-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PAGE: CLASSES ===== -->
+      <div class="page" id="page-classes">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Manage your subjects and class codes</div>
+          </div>
+          <button class="btn-sm btn-green" onclick="openModal('modal-create-class')">+ Create Class</button>
+        </div>
+        <div class="classes-grid" id="classes-grid"></div>
+      </div>
+
+      <!-- ===== PAGE: STUDENTS ===== -->
+      <div class="page" id="page-students">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Monitor enrollment & performance</div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-sm btn-green" onclick="openCreateStudentModal()">+ Add Student</button>
+            <select class="select-input" id="student-filter-class" onchange="renderStudentTable()" style="width:180px;padding:9px 14px;">
+              <option value="all">All Classes</option>
+            </select>
+            <select class="select-input" id="student-filter-status" onchange="renderStudentTable()" style="width:160px;padding:9px 14px;">
+              <option value="all">All Status</option>
+              <option value="approved">Approved</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Class</th>
+                  <th>Score Avg</th>
+                  <th>Progress</th>
+                  <th>Quizzes Done</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="student-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PAGE: NOTIFICATIONS ===== -->
+      <div class="page" id="page-notifications">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Updates and alerts across your classes</div>
+          </div>
+        </div>
+        <div id="notifications-list"></div>
+      </div>
+
+      <!-- ===== PAGE: TEACHER PROFILE ===== -->
+      <div class="page" id="page-profile">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Update your account details and password</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="section-title" style="margin-bottom:14px;">👤 Profile Details</div>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="tprof-name" placeholder="Last, First Middle Ext">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" id="tprof-email" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">School / Institution</label>
+              <input type="text" class="form-input" id="tprof-school" placeholder="School name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teacher ID</label>
+              <input type="text" class="form-input" id="tprof-teacherid" placeholder="Teacher ID">
+            </div>
+            <button class="btn-sm btn-green" onclick="saveTeacherProfile()" style="padding:10px 14px;">Save Changes</button>
+          </div>
+
+          <div class="card">
+            <div class="section-title" style="margin-bottom:14px;">🔐 Change Password</div>
+            <div class="form-group">
+              <label class="form-label">Current Password</label>
+              <input type="password" class="form-input" id="tprof-current-pass" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label class="form-label">New Password</label>
+              <input type="password" class="form-input" id="tprof-new-pass" placeholder="Min. 8 characters">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm New Password</label>
+              <input type="password" class="form-input" id="tprof-confirm-pass" placeholder="Re-enter password">
+            </div>
+            <button class="btn-sm btn-outline" onclick="changeTeacherPassword()" style="padding:10px 14px;">Update Password</button>
+            <div style="margin-top:10px;font-size:12px;color:var(--text-soft);">
+              Tip: Use at least 8 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PAGE: QUIZZES ===== -->
+      <div class="page" id="page-quizzes">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Create and monitor student quizzes</div>
+          </div>
+          <button class="btn-sm btn-green" onclick="openModal('modal-create-quiz')">+ Create Quiz</button>
+        </div>
+        <div id="quizzes-list"></div>
+      </div>
+
+      <!-- ===== PAGE: ASSIGNMENTS ===== -->
+      <div class="page" id="page-assignments">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">File submissions & activity tasks</div>
+          </div>
+          <button class="btn-sm btn-green" onclick="openModal('modal-create-assignment')">+ Create Assignment</button>
+        </div>
+        <div id="assignments-list"></div>
+      </div>
+
+      <!-- PAGE: RANKINGS -->
+      <div class="page" id="page-rankings">
+        <div class="section-header" style="margin-bottom:24px;">
+          <div>
+            <div class="section-sub">Leaderboard and performance overview</div>
+          </div>
+          <select class="select-input" id="rank-filter" onchange="renderRankings()" style="width:180px;padding:9px 14px;">
+            <option value="all">All Classes</option>
+          </select>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px;">🏆 Top Performers</div>
+            <div id="rankings-table"></div>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px;">📈 Score Distribution</div>
+            <div id="score-dist-chart" class="bar-chart" style="height:140px;align-items:flex-end;"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:20px;">
+          <div class="section-title" style="margin-bottom:16px;">📋 Full Score Sheet</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Rank</th><th>Student</th><th>Class</th><th>Total Points</th><th>Quizzes</th><th>Assignments</th><th>Avg Score</th></tr>
+              </thead>
+              <tbody id="rank-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end content -->
+  </main>
+</div><!-- end app -->
+
+<!-- MODALS -->
+
+<!-- Create Class -->
+<div class="modal-overlay" id="modal-create-class" onclick="handleOverlayClick(event,'modal-create-class')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Create New Class</div>
+      <button class="modal-close" onclick="closeModal('modal-create-class')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Subject Name</label>
+          <input type="text" class="form-input" id="cls-name" placeholder="e.g. Web Development">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Section</label>
+          <input type="text" class="form-input" id="cls-section" placeholder="e.g. BSIT 3A">
+        </div>
+        <div class="form-group">
+          <label class="form-label">School Year</label>
+          <input type="text" class="form-input" id="cls-year" placeholder="e.g. 2024–2025">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Semester</label>
+          <select class="select-input" id="cls-sem">
+            <option>1st Semester</option>
+            <option>2nd Semester</option>
+            <option>Summer</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Description (optional)</label>
+          <textarea class="form-input" id="cls-desc" placeholder="Short description of this class..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Banner Color</label>
+          <select class="select-input" id="cls-color">
+            <option value="var(--green-mid)">Forest Green</option>
+            <option value="var(--blue)">Deep Blue</option>
+            <option value="var(--gold)">Gold</option>
+            <option value="var(--red)">Red</option>
+            <option value="#7B2FBE">Purple</option>
+          </select>
+        </div>
+      </div>
+      <div style="background:var(--green-pale);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--green-mid);font-weight:600;">
+        💡 A unique class code will be automatically generated for students to join.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('modal-create-class')">Cancel</button>
+      <button class="btn-sm btn-green" onclick="createClass()">Create Class</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Class -->
+<div class="modal-overlay" id="modal-edit-class" onclick="handleOverlayClick(event,'modal-edit-class')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Edit Class</div>
+      <button class="modal-close" onclick="closeModal('modal-edit-class')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-cls-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Subject Name</label>
+          <input type="text" class="form-input" id="edit-cls-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Section</label>
+          <input type="text" class="form-input" id="edit-cls-section">
+        </div>
+        <div class="form-group">
+          <label class="form-label">School Year</label>
+          <input type="text" class="form-input" id="edit-cls-year">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Semester</label>
+          <select class="select-input" id="edit-cls-sem">
+            <option>1st Semester</option>
+            <option>2nd Semester</option>
+            <option>Summer</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Description</label>
+          <textarea class="form-input" id="edit-cls-desc"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Banner Color</label>
+          <select class="select-input" id="edit-cls-color">
+            <option value="var(--green-mid)">Forest Green</option>
+            <option value="var(--blue)">Deep Blue</option>
+            <option value="var(--gold)">Gold</option>
+            <option value="var(--red)">Red</option>
+            <option value="#7B2FBE">Purple</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('modal-edit-class')">Cancel</button>
+      <button class="btn-sm btn-green" onclick="saveClassChanges()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Student CRUD Modal -->
+<div class="modal-overlay" id="modal-student-form" onclick="handleOverlayClick(event,'modal-student-form')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="student-form-title">Add Student</div>
+      <button class="modal-close" onclick="closeModal('modal-student-form')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="student-form-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="student-form-name" placeholder="Student name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="student-form-email" placeholder="student@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Class</label>
+          <select class="select-input" id="student-form-class"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="select-input" id="student-form-status">
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('modal-student-form')">Cancel</button>
+      <button class="btn-sm btn-green" onclick="saveStudentForm()">Save Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Quiz -->
+<div class="modal-overlay" id="modal-create-quiz" onclick="handleOverlayClick(event,'modal-create-quiz')">
+  <div class="modal" style="width:720px;">
+    <div class="modal-header">
+      <div class="modal-title">Create New Quiz</div>
+      <button class="modal-close" onclick="closeModal('modal-create-quiz')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group form-full">
+          <label class="form-label">Quiz Title</label>
+          <input type="text" class="form-input" id="quiz-title" placeholder="e.g. Chapter 3 – Variables & Data Types">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assign to Class</label>
+          <select class="select-input" id="quiz-class"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Due Date & Time</label>
+          <input type="datetime-local" class="form-input" id="quiz-due">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time Limit (minutes)</label>
+          <input type="number" class="form-input" id="quiz-time" placeholder="e.g. 30" min="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Total Points</label>
+          <input type="number" class="form-input" id="quiz-points" placeholder="e.g. 100" min="1">
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label class="form-label">Quiz Type</label>
+        <div class="quiz-type-grid">
+          <div class="quiz-type-card selected" onclick="selectQuizType(this,'multiple-choice')">
+            <div class="quiz-type-icon">☑️</div>
+            <div class="quiz-type-label">Multiple Choice</div>
+            <div class="quiz-type-desc">Choose from options</div>
+          </div>
+          <div class="quiz-type-card" onclick="selectQuizType(this,'identification')">
+            <div class="quiz-type-icon">✍️</div>
+            <div class="quiz-type-label">Identification</div>
+            <div class="quiz-type-desc">Type the answer</div>
+          </div>
+          <div class="quiz-type-card" onclick="selectQuizType(this,'true-false')">
+            <div class="quiz-type-icon">⚖️</div>
+            <div class="quiz-type-label">True or False</div>
+            <div class="quiz-type-desc">Decide T/F</div>
+          </div>
+          <div class="quiz-type-card" onclick="selectQuizType(this,'fill-blank')">
+            <div class="quiz-type-icon">📝</div>
+            <div class="quiz-type-label">Fill in the Blank</div>
+            <div class="quiz-type-desc">Complete the sentence</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <label class="form-label" style="margin:0;">Questions</label>
+          <button class="btn-sm btn-outline" onclick="addQuestion()">+ Add Question</button>
+        </div>
+        <div id="questions-container"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('modal-create-quiz')">Cancel</button>
+      <button class="btn-sm btn-green" onclick="createQuiz()">Publish Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Assignment -->
+<div class="modal-overlay" id="modal-create-assignment" onclick="handleOverlayClick(event,'modal-create-assignment')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Create Assignment</div>
+      <button class="modal-close" onclick="closeModal('modal-create-assignment')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group form-full">
+          <label class="form-label">Assignment Title</label>
+          <input type="text" class="form-input" id="asgn-title" placeholder="e.g. HTML Portfolio Project">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assign to Class</label>
+          <select class="select-input" id="asgn-class"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Due Date & Time</label>
+          <input type="datetime-local" class="form-input" id="asgn-due">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Instructions</label>
+          <textarea class="form-input" id="asgn-instructions" placeholder="Describe what students need to do..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Max Score</label>
+          <input type="number" class="form-input" id="asgn-score" placeholder="e.g. 100" min="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Allowed File Types</label>
+          <select class="select-input" id="asgn-files">
+            <option value="any">Any File</option>
+            <option value="pdf">PDF Only</option>
+            <option value="image">Images (JPG, PNG)</option>
+            <option value="doc">Documents (DOC, DOCX)</option>
+            <option value="zip">ZIP Archive</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('modal-create-assignment')">Cancel</button>
+      <button class="btn-sm btn-green" onclick="createAssignment()">Publish Assignment</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quiz Monitor Modal -->
+<div class="modal-overlay" id="modal-quiz-monitor" onclick="handleOverlayClick(event,'modal-quiz-monitor')">
+  <div class="modal" style="width:680px;">
+    <div class="modal-header">
+      <div class="modal-title" id="quiz-monitor-title">Quiz Monitor</div>
+      <button class="modal-close" onclick="closeModal('modal-quiz-monitor')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="quiz-monitor-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Assignment Monitor Modal -->
+<div class="modal-overlay" id="modal-asgn-monitor" onclick="handleOverlayClick(event,'modal-asgn-monitor')">
+  <div class="modal" style="width:680px;">
+    <div class="modal-header">
+      <div class="modal-title" id="asgn-monitor-title">Assignment Submissions</div>
+      <button class="modal-close" onclick="closeModal('modal-asgn-monitor')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="asgn-monitor-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Student Profile Modal -->
+<div class="modal-overlay" id="modal-student-profile" onclick="handleOverlayClick(event,'modal-student-profile')">
+  <div class="modal" style="width:720px;">
+    <div class="modal-header">
+      <div class="modal-title" id="student-profile-title">Student Profile</div>
+      <button class="modal-close" onclick="closeModal('modal-student-profile')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="student-profile-body"></div>
+  </div>
+</div>
+
+<!-- Class Students Modal -->
+<div class="modal-overlay" id="modal-class-students" onclick="handleOverlayClick(event,'modal-class-students')">
+  <div class="modal" style="width:760px;">
+    <div class="modal-header">
+      <div class="modal-title" id="class-students-title">Class Students</div>
+      <button class="modal-close" onclick="closeModal('modal-class-students')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="class-students-body"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="../assets/js/admin-dash.js"></script>
+</body>
+</html>

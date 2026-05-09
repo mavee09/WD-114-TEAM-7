@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASRS — Tasks</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/shared.css"/>
+    <link rel="stylesheet" href="../assets/css/tasks.css"/>
+
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="app-nav">
+  <a href="home.html" class="nav-brand">
+    <div class="brand-badge"><i class="fas fa-graduation-cap"></i></div>
+    <span class="brand-name">ASRS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a href="quizzes.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Quizzes</a></li>
+    <li><a href="minigames.html" class="nav-link"><i class="fas fa-gamepad"></i> Mini-Games</a></li>
+    <li><a href="join-class.html" class="nav-link"><i class="fas fa-key"></i> Join Class</a></li>
+    <li><a href="tasks.html" class="nav-link active"><i class="fas fa-tasks"></i> Tasks</a></li>
+    <li><a href="lesson-detail.html" class="nav-link"><i class="fas fa-book-open"></i> Lessons</a></li>
+    <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="notif-wrapper" id="notifWrapper">
+      <button class="notif-btn" onclick="toggleNotifications()"><i class="fas fa-bell"></i><span class="notif-badge" id="notifBadge">3</span></button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header"><span>Notifications</span><button class="mark-all" onclick="markAllRead()">Mark all read</button></div>
+        <div class="notif-list">
+          <div class="notif-item unread" onclick="markRead(this)"><div class="notif-icon quiz"><i class="fas fa-clipboard-check"></i></div><div class="notif-content"><p class="notif-title">New Quiz Available</p><p class="notif-desc">Web Development Quiz 3 is now live!</p><span class="notif-time">2 mins ago</span></div><div class="unread-dot"></div></div>
+          <div class="notif-item unread" onclick="markRead(this)"><div class="notif-icon trophy"><i class="fas fa-trophy"></i></div><div class="notif-content"><p class="notif-title">Achievement Unlocked!</p><p class="notif-desc">You earned the "Quiz Master" badge.</p><span class="notif-time">1 hour ago</span></div><div class="unread-dot"></div></div>
+          <div class="notif-item unread" onclick="markRead(this)"><div class="notif-icon task"><i class="fas fa-bell"></i></div><div class="notif-content"><p class="notif-title">Task Reminder</p><p class="notif-desc">Daily challenge resets in 3 hours.</p><span class="notif-time">3 hours ago</span></div><div class="unread-dot"></div></div>
+        </div>
+        <a href="#" class="notif-footer">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="user-menu" id="userMenu">
+      <button class="user-avatar-btn" onclick="toggleUserMenu()">
+        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ms.Perez&backgroundColor=1a4a2e&fontFamily=Georgia&fontSize=40&fontWeight=700&textColor=ffffff" alt="Ms. Perez" class="user-avatar"/>
+        <span class="user-name">Ms. Perez</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="profile.html" onclick="closeMenus()"><i class="fas fa-user"></i> My Profile</a>
+        <a href="settings.html" onclick="closeMenus()"><i class="fas fa-cog"></i> Settings</a>
+        <div class="divider"></div>
+        <a href="login.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-eyebrow"><i class="fas fa-tasks" style="font-size:.65rem"></i> Stay Organized</div>
+  <h1>Tasks <em>&amp; Challenges</em></h1>
+  <p>Track your daily challenges and upcoming deadlines</p>
+</div>
+
+<div class="page-wrap" style="max-width:800px">
+
+  <!-- Daily Challenges -->
+  <div style="margin-bottom:2rem">
+    <div class="section-top">
+      <div class="section-label">Daily Challenges <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;background:rgba(212,160,23,0.12);color:var(--accent);padding:.15rem .55rem;border-radius:999px;text-transform:none;letter-spacing:0">Resets in 5h</span></div>
+    </div>
+    <div class="challenge-row done" onclick="toggleChallenge(this)">
+      <div class="ch-checkbox"><i class="fas fa-check" style="font-size:.65rem"></i></div>
+      <div class="ch-info"><div class="ch-title">Review 1 Lesson</div><div class="ch-sub">HCI Lesson 4 — completed today</div></div>
+      <span class="ch-pts">+7 pts</span>
+      <span class="ch-tag">Done ✓</span>
+    </div>
+    <div class="challenge-row" onclick="toggleChallenge(this)">
+      <div class="ch-checkbox"></div>
+      <div class="ch-info"><div class="ch-title">Complete 1 Quiz</div><div class="ch-sub">Any subject quiz counts</div></div>
+      <span class="ch-pts">+10 pts</span>
+    </div>
+    <div class="challenge-row" onclick="toggleChallenge(this)">
+      <div class="ch-checkbox"></div>
+      <div class="ch-info"><div class="ch-title">Play 1 Mini-Game</div><div class="ch-sub">Flashcard Blitz or Match Master</div></div>
+      <span class="ch-pts">+5 pts</span>
+    </div>
+  </div>
+
+  <!-- Teacher Assignments -->
+  <div style="margin-bottom:2rem">
+    <div class="section-label">Teacher Assignments</div>
+    <div id="teacherAssignmentsList">
+      <div class="empty-state"><i class="fas fa-inbox"></i>No assignments from your teacher yet.</div>
+    </div>
+  </div>
+
+  <!-- My Tasks -->
+  <div>
+    <div class="section-top">
+      <div class="section-label">My Tasks</div>
+      <button class="add-btn" onclick="toggleAddForm()"><i class="fas fa-plus"></i> Add Task</button>
+    </div>
+
+    <div class="add-form" id="addForm">
+      <div class="form-row">
+        <div class="form-group"><label>Task Name</label><input type="text" id="taskName" placeholder="e.g. Submit HCI project"/></div>
+        <div class="form-group"><label>Due Date</label><input type="date" id="taskDate"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Type</label>
+          <select id="taskType"><option value="quiz">Quiz</option><option value="task" selected>Task</option><option value="review">Review</option></select>
+        </div>
+        <div class="form-group"><label>Subject</label>
+          <select id="taskSubject"><option>Web Development</option><option>HCI</option><option>CS Fundamentals</option><option>Other</option></select>
+        </div>
+      </div>
+      <div class="form-btns">
+        <button class="btn-sm btn-accent" onclick="addTask()">Add Task</button>
+        <button class="btn-sm btn-cancel" onclick="toggleAddForm()">Cancel</button>
+      </div>
+    </div>
+
+    <div id="taskList">
+      <div class="task-row" id="t1">
+        <div class="t-cb" onclick="toggleTask('t1')"></div>
+        <div class="t-info"><div class="t-title">Web Dev Midterm Quiz</div><div class="t-due"><i class="fas fa-calendar" style="margin-right:.3rem"></i>Due May 6, 2026</div></div>
+        <span class="t-badge badge-quiz">Quiz</span>
+        <button class="delete-btn" onclick="deleteTask('t1')"><i class="fas fa-trash"></i></button>
+      </div>
+      <div class="task-row" id="t2">
+        <div class="t-cb" onclick="toggleTask('t2')"></div>
+        <div class="t-info"><div class="t-title">HCI Project Submission</div><div class="t-due"><i class="fas fa-calendar" style="margin-right:.3rem"></i>Due May 10, 2026</div></div>
+        <span class="t-badge badge-task">Task</span>
+        <button class="delete-btn" onclick="deleteTask('t2')"><i class="fas fa-trash"></i></button>
+      </div>
+      <div class="task-row" id="t3">
+        <div class="t-cb" onclick="toggleTask('t3')"></div>
+        <div class="t-info"><div class="t-title">Review CSS Flexbox Notes</div><div class="t-due"><i class="fas fa-calendar" style="margin-right:.3rem"></i>Due May 8, 2026</div></div>
+        <span class="t-badge badge-review">Review</span>
+        <button class="delete-btn" onclick="deleteTask('t3')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="app-footer">
+  <div>
+    <div class="footer-brand"><i class="fas fa-graduation-cap"></i> Academic Subject Review System</div>
+    <p class="footer-copy">© 2026 ASRS · All Rights Reserved</p>
+  </div>
+  <div class="footer-links">
+    <a href="home.html">Dashboard</a>
+    <a href="landing.html#contact">Contact</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../assets/js/shared.js"></script>
+
+<script src="../assets/js/tasks.js"></script>
+</body>
+</html>

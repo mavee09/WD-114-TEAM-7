@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASRS — Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+    <div class="left-glow"></div>
+    <a href="landing.html" class="brand">
+        <div class="brand-badge"><i class="fas fa-graduation-cap"></i></div>
+        <span class="brand-name">ASRS</span>
+    </a>
+
+    <div class="left-hero">
+        <div class="chip">
+            <div class="chip-dot"><i class="fas fa-star" style="font-size:0.5rem"></i></div>
+            Academic Subject Review System
+        </div>
+        <h1>Learn smarter,<br>not <em>harder.</em></h1>
+        <p>Gamified quizzes, daily challenges, and a lesson library built to make studying feel like an achievement — every single day.</p>
+
+        <div class="left-stats">
+            <div class="l-stat"><strong>1.2k+</strong><span>Students</span></div>
+            <div class="l-stat"><strong>98%</strong><span>Satisfaction</span></div>
+            <div class="l-stat"><strong>50+</strong><span>Lessons</span></div>
+        </div>
+    </div>
+
+    <div class="left-footer">© 2026 Academic Subject Review System</div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+    <div class="auth-box">
+        <div class="auth-title" id="authTitle">Welcome back</div>
+        <div class="auth-sub" id="authSub">Sign in to continue your learning journey.</div>
+
+        <div class="auth-tabs">
+            <button class="tab-btn active" id="tab-login" type="button">Sign In</button>
+            <button class="tab-btn" id="tab-register" type="button">Create Account</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" novalidate>
+            <div class="field">
+                <label>Email Address <span class="req">*</span></label>
+                <input type="email" id="login-email" placeholder="name@school.edu" required>
+            </div>
+            <div class="field">
+                <label>Password <span class="req">*</span></label>
+                <div class="password-wrap">
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                    <button type="button" class="pw-toggle" data-toggle-target="login-password" aria-label="Show password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-sign-in-alt"></i> Sign In to Dashboard
+            </button>
+            <div class="form-message" id="login-message"></div>
+            <p class="switch-hint">New here? <a href="#" data-switch="register">Create an account</a></p>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="register-form" class="hidden" novalidate>
+            <div class="role-grid" role="group">
+                <label class="role-opt">
+                    <input type="radio" name="role" value="student" checked>
+                    <i class="fas fa-user-graduate"></i> Student
+                </label>
+                <label class="role-opt">
+                    <input type="radio" name="role" value="teacher">
+                    <i class="fas fa-chalkboard-teacher"></i> Teacher
+                </label>
+            </div>
+
+            <div class="name-grid">
+                <div class="field">
+                    <label>Last Name <span class="req">*</span></label>
+                    <input type="text" id="reg-last-name" placeholder="e.g. Dela Cruz" required>
+                </div>
+                <div class="field">
+                    <label>First Name <span class="req">*</span></label>
+                    <input type="text" id="reg-first-name" placeholder="e.g. Jamie" required>
+                </div>
+            </div>
+            <div class="name-grid optional-grid">
+                <div class="field">
+                    <label>Middle Name <span class="optional-text">(Optional)</span></label>
+                    <input type="text" id="reg-middle-name" placeholder="e.g. Santos">
+                </div>
+                <div class="field">
+                    <label>Extension Name <span class="optional-text">(Optional)</span></label>
+                    <input type="text" id="reg-extension-name" placeholder="e.g. Jr., III">
+                </div>
+            </div>
+            <div id="student-fields">
+                <div class="form-section">
+                    <div class="section-label">Academic Info</div>
+                    <div class="name-grid">
+                        <div class="field">
+                            <label>Course <span class="req">*</span></label>
+                            <select id="reg-course" required>
+                                <option value="" selected>Select Course</option>
+                                <option value="BSIT">BSIT</option>
+                                <option value="BSCS">BSCS</option>
+                                <option value="BSEMC">BSEMC</option>
+                                <option value="ACT AD">ACT AD</option>
+                                <option value="ACT NT">ACT NT</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>School Year <span class="req">*</span></label>
+                            <select id="reg-school-year" required>
+                                <option value="" selected>Select Year</option>
+                                <option value="2024-2025">2024–2025</option>
+                                <option value="2025-2026">2025–2026</option>
+                                <option value="2026-2027">2026–2027</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="name-grid">
+                        <div class="field">
+                            <label>Year Level <span class="req">*</span></label>
+                            <select id="reg-year-level" required>
+                                <option value="" selected>Select Level</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Section <span class="req">*</span></label>
+                            <select id="reg-section" required>
+                                <option value="" selected>Select Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Certificate of Registration (COR) <span class="req">*</span></label>
+                    <div class="file-upload-area" onclick="document.getElementById('reg-cor').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span id="corLabel">Upload image (JPG/PNG, max 2MB)</span>
+                        <input type="file" id="reg-cor" accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Email Address <span class="req">*</span></label>
+                <input type="email" id="reg-email" placeholder="name@school.edu" required>
+            </div>
+            <div class="field">
+                <label>Password <span class="req">*</span></label>
+                <div class="password-wrap">
+                    <input type="password" id="reg-password" placeholder="Min. 8 characters" required>
+                    <button type="button" class="pw-toggle" data-toggle-target="reg-password" aria-label="Show password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="field">
+                <label>Confirm Password <span class="req">*</span></label>
+                <div class="password-wrap">
+                    <input type="password" id="reg-confirm" placeholder="Re-enter password" required>
+                    <button type="button" class="pw-toggle" data-toggle-target="reg-confirm" aria-label="Show password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="teacher-fields" class="hidden">
+                <div class="field">
+                    <label>School / Institution <span class="req">*</span></label>
+                    <input type="text" id="reg-school" placeholder="Enter school name">
+                </div>
+                <div class="field">
+                    <label>Teacher ID <span class="req">*</span></label>
+                    <input type="text" id="reg-teacher-id" placeholder="Enter teacher ID">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+            <div class="form-message" id="register-message"></div>
+            <p class="switch-hint">Already have an account? <a href="#" data-switch="login">Sign in</a></p>
+        </form>
+    </div>
+</div>
+
+<script src="../assets/js/login.js"></script>
+</body>
+</html>
